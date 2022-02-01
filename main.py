@@ -7,8 +7,8 @@
 
 ######## IMPORTS #########
 
-# Menu Class Import
+from Objects.Menu import Menu
 
 ####### MAIN MENU ########
 
-# Menu Classes Call
+Menu().Display().main()

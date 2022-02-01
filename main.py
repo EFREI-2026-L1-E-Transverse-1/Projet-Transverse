@@ -7,7 +7,7 @@
 
 ######## IMPORTS #########
 
-from Objects.Menu import Menu
+from Object.Menu import Menu
 
 ####### MAIN MENU ########
 

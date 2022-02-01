@@ -7,6 +7,7 @@
 
 ######## IMPORTS #########
 
+import Screen
 from Object.Menu import Menu
 
 ####### MAIN MENU ########

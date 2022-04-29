@@ -52,8 +52,8 @@ def lesregles():
             self.start_ammo = ammo
             self.tir_cooldown = 0
             self.grenades = grenades
-            self.health = 100
-            self.max_health = self.health
+            self.health = 50
+            self.max_health = 100
             self.direction = 1
             self.vel_y = 0
             self.jump = False
@@ -88,6 +88,27 @@ def lesregles():
             #update cooldown
             if self.tir_cooldown > 0:
                 self.tir_cooldown -= 1
+
+
+        def update_health_bar(self, surface):
+
+            #couleur de la barre de vie et de l'arrière plan
+
+            bar_color = (255,0,0)
+            bar_under_color = (222,222,222)
+
+            #definition de la barre de vie
+
+            bar_pos = [self.rect.x + 20, self.rect.y - 14, self.health, 6]
+            bar_under_pos = [self.rect.x + 20, self.rect.y - 14, self.max_health, 6]
+            
+            #affichage de la barre de vie
+
+            pygame.draw.rect(surface, bar_under_color, bar_under_pos)
+            pygame.draw.rect(surface, bar_color, bar_pos)
+            
+        
+        
 
 
         def move(self, mouvement_gauche, mouvement_droite):
@@ -237,7 +258,7 @@ def lesregles():
     grenade_group = pygame.sprite.Group()
 
 
-    player = Soldier('player', 200, 140, 0.5, 5, 20, 1000000)
+    player = Soldier('player', 200, 140, 0.5, 5, 5, 5) # avant dernier: munitions pistolet et dernier: munitions grenades
 
 
 
@@ -251,7 +272,7 @@ def lesregles():
 
         player.update()
         player.draw()
-
+        player.update_health_bar(screen)    #barre de vie
 
 
 

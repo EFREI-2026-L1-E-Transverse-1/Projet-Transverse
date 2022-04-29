@@ -10,7 +10,7 @@
 
 #### Groupe E5
 - **Alix Brunet**      _(20211029)_  
-- **Martin Kang**      _()_  
+- **Martin Kang**      _(20210612)_  
 - **Alexandre Manjarres**  _(20210639)_  
 - **Léa Varing**        _(20210703)_  
 - **Adem Debbahi**             _()_  

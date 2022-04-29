@@ -16,9 +16,10 @@
 
 # début de structure de menu (martin)
 import pygame
-from nouvellepartie import nouvellepartie
+from nouvellepartie import *
 from lesregles import lesregles
 from credits import credits
+
 
 # Initialiaser pygame
 pygame.init()
@@ -80,7 +81,7 @@ while running:
 
             if event.key == pygame.K_RETURN:
                 if limite ==1:
-                    background = nouvellepartie()
+                    background = lancer()
                 elif limite==2:
                     background = lesregles()
                 elif limite==3:

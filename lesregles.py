@@ -52,7 +52,7 @@ def lesregles():
             self.start_ammo = ammo
             self.tir_cooldown = 0
             self.grenades = grenades
-            self.health = 50
+            self.health = 100
             self.max_health = 100
             self.direction = 1
             self.vel_y = 0
@@ -107,8 +107,11 @@ def lesregles():
             pygame.draw.rect(surface, bar_under_color, bar_under_pos)
             pygame.draw.rect(surface, bar_color, bar_pos)
             
-        
-        
+        def damage(self, amount):
+            
+            # dégats reçus
+
+            self.health -= amount
 
 
         def move(self, mouvement_gauche, mouvement_droite):
@@ -258,7 +261,7 @@ def lesregles():
     grenade_group = pygame.sprite.Group()
 
 
-    player = Soldier('player', 200, 140, 0.5, 5, 5, 5) # avant dernier: munitions pistolet et dernier: munitions grenades
+    player = Soldier('player', 200, 140, 0.5, 5, 300, 600) # avant dernier: munitions pistolet et dernier: munitions grenades
 
 
 

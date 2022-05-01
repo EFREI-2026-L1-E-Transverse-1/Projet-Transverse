@@ -93,25 +93,27 @@ def lesregles():
         def update_health_bar(self, surface):
 
             #couleur de la barre de vie et de l'arrière plan
-
             bar_color = (255,0,0)
             bar_under_color = (222,222,222)
 
             #definition de la barre de vie
-
             bar_pos = [self.rect.x + 20, self.rect.y - 14, self.health, 6]
             bar_under_pos = [self.rect.x + 20, self.rect.y - 14, self.max_health, 6]
             
             #affichage de la barre de vie
-
             pygame.draw.rect(surface, bar_under_color, bar_under_pos)
             pygame.draw.rect(surface, bar_color, bar_pos)
             
         def damage(self, amount):
             
             # dégats reçus
-
             self.health -= amount
+            
+            # si le perso meure
+            if self.health <= 0:
+                self.remove()
+                self.alive = False
+
 
 
         def move(self, mouvement_gauche, mouvement_droite):
@@ -218,10 +220,9 @@ def lesregles():
                 self.kill()
 
             #check collision with characters
-            if pygame.sprite.spritecollide(player, bullet_group, False):
-                if player.alive:
-                    player.health -= 5
-                    self.kill()
+            for player in pygame.sprite.spritecollide(player, bullet_group, False):
+                self.kill()
+                player.damage(5)
 
 
 

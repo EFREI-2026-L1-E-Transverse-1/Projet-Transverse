@@ -5,8 +5,8 @@ def lesregles():
     pygame.init()
 
 
-    LARGEUR_ECRAN = 900
-    LONGUEUR_ECRAN = int(LARGEUR_ECRAN * 0.8)
+    LARGEUR_ECRAN = 850
+    LONGUEUR_ECRAN = 700
 
     screen = pygame.display.set_mode((LARGEUR_ECRAN, LONGUEUR_ECRAN))
     pygame.display.set_caption('Blobs Battle!')
@@ -16,15 +16,19 @@ def lesregles():
     FPS = 60
 
     #Variable de gravité
-    GRAVITE = 0.75
+    GRAVITE = 0.4
 
     #Variable personnage
     mouvement_gauche = False
     mouvement_droite = False
+    mouvement_gauche2 = False
+    mouvement_droite2 = False
     tir = False
+    tir2 = False
     grenade = False
     grenade_thrown = False
-
+    grenade2 = False
+    grenade_thrown2 = False
 
 
     bullet_img = pygame.image.load('img/icons/bullet.png').convert_alpha()
@@ -89,7 +93,6 @@ def lesregles():
             if self.tir_cooldown > 0:
                 self.tir_cooldown -= 1
 
-
         def update_health_bar(self, surface):
 
             #couleur de la barre de vie et de l'arrière plan
@@ -108,13 +111,6 @@ def lesregles():
             
             # dégats reçus
             self.health -= amount
-            
-            # si le perso meure
-            if self.health <= 0:
-                self.remove()
-                self.alive = False
-
-
 
         def move(self, mouvement_gauche, mouvement_droite):
 
@@ -160,7 +156,12 @@ def lesregles():
                 bullet_group.add(bullet)
                 #reduce ammo
                 self.ammo -= 1
-
+            if self.tir_cooldown == 0 and self.ammo > 0:
+                self.tir_cooldown = 20
+                bullet2 = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
+                bullet_group2.add(bullet2)
+                #reduce ammo
+                self.ammo -= 1
 
         def update_animation(self):
             #update animation
@@ -220,9 +221,14 @@ def lesregles():
                 self.kill()
 
             #check collision with characters
-            for player in pygame.sprite.spritecollide(player, bullet_group, False):
-                self.kill()
-                player.damage(5)
+            if pygame.sprite.spritecollide(player, bullet_group, False):
+                if player.alive:
+                    player.health -= 5
+                    self.kill()
+            if pygame.sprite.spritecollide(player2, bullet_group2, False):
+                if player2.alive:
+                    player2.health -= 5
+                    self.kill()
 
 
 
@@ -261,9 +267,12 @@ def lesregles():
     bullet_group = pygame.sprite.Group()
     grenade_group = pygame.sprite.Group()
 
+    bullet_group2 = pygame.sprite.Group()
+    grenade_group2 = pygame.sprite.Group()
 
-    player = Soldier('player', 200, 140, 0.5, 5, 300, 600) # avant dernier: munitions pistolet et dernier: munitions grenades
 
+    player = Soldier('player', 200, 140, 0.4, 5, 50, 50)
+    player2 = Soldier('player2', 800, 140, 0.4, 5, 50, 50)
 
 
 
@@ -278,6 +287,9 @@ def lesregles():
         player.draw()
         player.update_health_bar(screen)    #barre de vie
 
+        player2.update()
+        player2.draw()
+        player2.update_health_bar(screen)
 
 
 
@@ -285,6 +297,13 @@ def lesregles():
         grenade_group.update()
         bullet_group.draw(screen)
         grenade_group.draw(screen)
+
+
+        bullet_group2.update()
+        grenade_group2.update()
+        bullet_group2.draw(screen)
+        grenade_group2.draw(screen)
+
 
 
 
@@ -310,6 +329,30 @@ def lesregles():
             player.move(mouvement_gauche, mouvement_droite)
 
 
+        if player2.alive:
+
+            if tir2:
+                player2.tir()
+
+            elif grenade2 and grenade_thrown2 == False and player2.grenades > 0:
+                grenade2 = Grenade(player2.rect.centerx + (0.5 * player2.rect.size[0] * player2.direction),\
+                            player2.rect.top, player2.direction)
+                grenade_group2.add(grenade2)
+
+                player2.grenades -= 1
+                grenade_thrown2 = True
+            if player2.in_air:
+                player2.update_action(2)
+            elif mouvement_gauche2 or mouvement_droite2:
+                player2.update_action(1)
+
+            else:
+                player2.update_action(0)
+            player2.move(mouvement_gauche2, mouvement_droite2)
+
+
+
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
@@ -318,23 +361,30 @@ def lesregles():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     mouvement_gauche = True
-                if event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT:
                     mouvement_droite = True
-
+                elif event.key == pygame.K_q:
+                    mouvement_gauche2 = True
+                elif event.key == pygame.K_d:
+                    mouvement_droite2 = True
 
                 if event.key == pygame.K_UP and player.alive:
                     player.jump = True
-                if event.key == pygame.K_ESCAPE:
+                elif event.key == pygame.K_z and player2.alive:
+                    player2.jump = True
+                elif event.key == pygame.K_ESCAPE:
                     run = False
-
 
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     mouvement_gauche = False
-                if event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT:
                     mouvement_droite = False
-
+                elif event.key == pygame.K_q:
+                    mouvement_gauche2 = False
+                elif event.key == pygame.K_d:
+                    mouvement_droite2 = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 3:
@@ -349,6 +399,19 @@ def lesregles():
             if event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
                     tir = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_h:
+                    grenade2 = True
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_h:
+                    grenade2 = False
+                    grenade_thrown2 = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_g:
+                    tir2 = True
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_g:
+                    tir2 = False
 
 
         pygame.display.update()

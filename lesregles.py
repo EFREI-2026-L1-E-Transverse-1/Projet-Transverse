@@ -248,7 +248,7 @@ def lesregles():
             pygame.sprite.Sprite.__init__(self)
             self.timer = 100
             self.vel_y = -14
-            self.speed = 7
+            self.speed = 9
             self.image = grenade_img
             self.rect = self.image.get_rect()
             self.rect.center = (x, y)
@@ -257,7 +257,7 @@ def lesregles():
         def update(self):
             self.vel_y += GRAVITE
             dx = self.direction * self.speed
-            dy = self.vel_y
+            dy = self.vel_y*0.8
 
 
             if self.rect.bottom + dy > 500:

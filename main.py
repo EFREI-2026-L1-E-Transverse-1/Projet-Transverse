@@ -7,22 +7,11 @@
 
 ######## IMPORTS #########
 
-# import Screen
-# from Object.Menu import Menu
-
-####### MAIN MENU ########
-
-# Menu().Display().main()
-
 # début de structure de menu (martin)
 import pygame
 from nouvellepartie import *
 from lesregles import lesregles
 from credits import credits
-
-
-
-
 
 # Initialiaser pygame
 pygame.init()
@@ -38,13 +27,14 @@ pygame.display.set_caption("Blobs Battle")
 icon = pygame.image.load("assets/icon.png")
 pygame.display.set_icon(icon)
 
+# Instance du sélectioneur visuel
 fleche = pygame.image.load("assets/fleche.xcf")
-selection_x = 550
-selection_y = 240
+choice = 2
+choice_space_y = 128
+default_selection_x = 700
+default_selection_y = 321
 
-limite = 1
-
-def selection_menu(x,y):
+def default_selection_menu(x,y):
     screen.blit(fleche, (x, y))
 
 running = True
@@ -53,44 +43,31 @@ while running:
     screen.blit(background,(0,0))
 
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
-            # Si la touche est préssée verifier si c'est à gauche ou à droite
-        if event.type == pygame.KEYDOWN:
+
+        elif event.type == pygame.KEYDOWN:
+
             if event.key == pygame.K_UP:
 
+                if choice != 1:
+                    choice -= 1
+                    default_selection_y -= choice_space_y
 
-                if limite == 2:
-                    limite-=1
-                    selection_y = 138
+            elif event.key == pygame.K_DOWN:
 
+                if choice != 3:
+                    choice += 1
+                    default_selection_y += choice_space_y
 
-                elif limite == 3:
-                    limite-=1
-                    selection_y = 240
-
-
-
-            if event.key == pygame.K_DOWN:
-
-                if limite == 1:
-                    limite+=1
-                    selection_y = 240
-
-
-                elif limite == 2:
-                    limite+=1
-                    selection_y = 340
-
-            if event.key == pygame.K_RETURN:
-                if limite ==1:
+            elif event.key == pygame.K_RETURN:
+                if choice == 1:
                     background = lancer()
-                elif limite==2:
+                elif choice == 2:
                     background = lesregles()
-                elif limite==3:
+                elif choice == 3:
                     background = credits()
 
-
-
-    selection_menu(selection_x,selection_y)
+    default_selection_menu(default_selection_x,default_selection_y)
     pygame.display.update()

@@ -16,7 +16,7 @@ Projet Transverse
 - **Martin Kang**      _(20210612)_
 - **Alexandre Manjarres**  _(20210639)_
 - **Léa Varing**        _(20210703)_
-- **Adem Debbahi**             _()_
+- **Adem Debbahi**             _(20210562)_
   
 ## Détails
 

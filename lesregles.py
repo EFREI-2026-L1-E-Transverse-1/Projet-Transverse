@@ -5,8 +5,8 @@ def lesregles():
     pygame.init()
 
 
-    LARGEUR_ECRAN = 850
-    LONGUEUR_ECRAN = 700
+    LARGEUR_ECRAN = 1280
+    LONGUEUR_ECRAN = 720
 
     screen = pygame.display.set_mode((LARGEUR_ECRAN, LONGUEUR_ECRAN))
     pygame.display.set_caption('Blobs Battle!')

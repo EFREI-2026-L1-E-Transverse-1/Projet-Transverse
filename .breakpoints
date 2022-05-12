@@ -1,3 +1,12 @@
 {
-  "files": {}
+  "files": {
+    "lesregles.py": [
+      {
+        "id": "8e89e10c-325b-4f2a-9323-ddfaba931981",
+        "line": 33,
+        "version": 35,
+        "index": 612
+      }
+    ]
+  }
 }

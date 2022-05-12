@@ -1,4 +1,12 @@
 [[package]]
+name = "functions"
+version = "0.7.0"
+description = "Functional programming in Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "numpy"
 version = "1.22.1"
 description = "NumPy is the fundamental package for array computing with Python."
@@ -17,9 +25,12 @@ python-versions = ">=3.6"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "294ea955c9a591a49dd7647f8fa1cb58a8809abf24de578115785488a73274b4"
+content-hash = "0285f43cb683184ecffe31071a7ea64b8bae9a586cbf7563dbf3599f7de7be88"
 
 [metadata.files]
+functions = [
+    {file = "functions-0.7.0.tar.gz", hash = "sha256:5a36bd11d36bbce210fecddd9ff1a475a86035905818a4075d6c7ebb2f714181"},
+]
 numpy = [
     {file = "numpy-1.22.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:3d62d6b0870b53799204515145935608cdeb4cebb95a26800b6750e48884cc5b"},
     {file = "numpy-1.22.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:831f2df87bd3afdfc77829bc94bd997a7c212663889d56518359c827d7113b1f"},

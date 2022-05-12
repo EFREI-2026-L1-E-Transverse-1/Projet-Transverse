@@ -37,7 +37,7 @@ def lesregles():
 
 
     #Couleurs et fond d'ecran
-    BG = pygame.image.load('img/bg.jpg')
+    BG = pygame.image.load('img/logoefrei.jpg')
     RED = (255, 0, 0)
 
     def draw_bg():

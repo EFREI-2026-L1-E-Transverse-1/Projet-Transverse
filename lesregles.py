@@ -205,13 +205,12 @@ def lesregles():
         def degats(self):
             if pygame.sprite.spritecollide(player, grenade_group2, False):
                 if player.alive:
-                    player.health -= 10
-                    self.remove()
+                    player.health -= 1
+                    grenade_group2.remove()
             if pygame.sprite.spritecollide(player2, grenade_group, False):
                 if player2.alive:
-                    player2.health -= 10
-                    self.remove()
-
+                    player2.health -= 1
+                    grenade_group.remove()
 
 
 
@@ -264,6 +263,7 @@ def lesregles():
             if self.rect.bottom + dy > 500:
                 dy = 500 - self.rect.bottom
                 self.speed = 0
+                self.kill()
 
 
             if self.rect.left + dx < 0 or self.rect.right + dx > LARGEUR_ECRAN:
@@ -274,6 +274,15 @@ def lesregles():
             self.rect.x += dx
             self.rect.y += dy
 
+            #check collision with characters
+            if pygame.sprite.spritecollide(player, grenade_group2, False):
+                if player.alive:
+                    player.health -= 10
+                    self.kill()
+            if pygame.sprite.spritecollide(player2, grenade_group, False):
+                if player2.alive:
+                    player2.health -= 10
+                    self.kill()
 
 
     bullet_group = pygame.sprite.Group()

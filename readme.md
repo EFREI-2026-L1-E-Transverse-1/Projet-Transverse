@@ -1,24 +1,27 @@
 # Blobs Battle
 
-### Projet Transverse
+Projet Transverse
 
 ## Informations
 
-- **Date d'Échéance** : 24-25-57 Mai 2022  
+### Dates
+
+- **Échéance** : 24-25-57 Mai 2022  
 
 ### Auteurs
 
-#### Groupe E5
-- **Alix Brunet**      _(20211029)_  
-- **Martin Kang**      _(20210612)_  
-- **Alexandre Manjarres**  _(20210639)_  
-- **Léa Varing**        _(20210703)_  
-- **Adem Debbahi**             _()_  
+<ins>Groupe E</ins>
+
+- **Alix Brunet**      _(20211029)_
+- **Martin Kang**      _(20210612)_
+- **Alexandre Manjarres**  _(20210639)_
+- **Léa Varing**        _(20210703)_
+- **Adem Debbahi**             _()_
   
 ## Détails
 
-- **Fichier à Exécuter** : main.py  
-- **Dépendances** : Pygames, Numpy  
+- **Fichier à Exécuter** : main.py
+- **Dépendance** : Pygames
 
 ## Description
 

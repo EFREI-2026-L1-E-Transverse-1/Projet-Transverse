@@ -2,13 +2,7 @@
 
 Projet Transverse
 
-## Informations
-
-### Dates
-
-- **Échéance** : 24-25-57 Mai 2022  
-
-### Auteurs
+## Auteurs
 
 <ins>Groupe E</ins>
 
@@ -18,10 +12,14 @@ Projet Transverse
 - **Léa Varing**        _(20210703)_
 - **Adem Debbahi**             _(20210562)_
   
-## Détails
+## Programation
 
 - **Fichier à Exécuter** : main.py
 - **Dépendance** : Pygames
+
+## Instructions
+
+- **Échéance** : 24-25-57 Mai 2022  
 
 ## Description
 

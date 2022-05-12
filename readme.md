@@ -19,7 +19,7 @@ Projet Transverse
 
 ## Instructions
 
-- **Échéance** : 24-25-57 Mai 2022  
+- **Échéance** : 24-25-27 Mai 2022  
 
 ## Description
 

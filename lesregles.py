@@ -202,6 +202,18 @@ def lesregles():
         def draw(self):
             screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
 
+        def degats(self):
+            if pygame.sprite.spritecollide(player, grenade_group2, False):
+                if player.alive:
+                    player.health -= 10
+                    self.remove()
+            if pygame.sprite.spritecollide(player2, grenade_group, False):
+                if player2.alive:
+                    player2.health -= 10
+                    self.remove()
+
+
+
 
 
     class Bullet(pygame.sprite.Sprite):
@@ -225,7 +237,7 @@ def lesregles():
                 if player.alive:
                     player.health -= 5
                     self.kill()
-            if pygame.sprite.spritecollide(player2, bullet_group2, False):
+            if pygame.sprite.spritecollide(player2, bullet_group, False):
                 if player2.alive:
                     player2.health -= 5
                     self.kill()
@@ -272,7 +284,7 @@ def lesregles():
 
 
     player = Soldier('player', 200, 140, 0.4, 5, 50, 50)
-    player2 = Soldier('player2', 800, 140, 0.4, 5, 50, 50)
+    player2 = Soldier('player2', 600, 140, 0.4, 5, 50, 50)
 
 
 
@@ -286,11 +298,12 @@ def lesregles():
         player.update()
         player.draw()
         player.update_health_bar(screen)    #barre de vie
+        player.degats()
 
         player2.update()
         player2.draw()
         player2.update_health_bar(screen)
-
+        player2.degats()
 
 
         bullet_group.update()
@@ -349,7 +362,8 @@ def lesregles():
             else:
                 player2.update_action(0)
             player2.move(mouvement_gauche2, mouvement_droite2)
-
+            
+            
 
 
 

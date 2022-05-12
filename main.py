@@ -21,23 +21,26 @@ from lesregles import lesregles
 from credits import credits
 
 
+
+
+
 # Initialiaser pygame
 pygame.init()
 
 # Crée la fenêtre
-screen = pygame.display.set_mode((800, 600))
+screen = pygame.display.set_mode((1280, 720))
 
 # Fond du menu
-background = pygame.image.load("assets/menu-alt.jpg")
+background = pygame.image.load("assets/FONDS_V2.PNG")
 
 # Titre et icone
 pygame.display.set_caption("Blobs Battle")
 icon = pygame.image.load("assets/icon.png")
 pygame.display.set_icon(icon)
 
-fleche = pygame.image.load("assets/fleche.png")
-selection_x = 200
-selection_y = 223
+fleche = pygame.image.load("assets/fleche.xcf")
+selection_x = 550
+selection_y = 240
 
 limite = 1
 
@@ -59,12 +62,12 @@ while running:
 
                 if limite == 2:
                     limite-=1
-                    selection_y = 223
+                    selection_y = 138
 
 
                 elif limite == 3:
                     limite-=1
-                    selection_y = 308
+                    selection_y = 240
 
 
 
@@ -72,12 +75,12 @@ while running:
 
                 if limite == 1:
                     limite+=1
-                    selection_y = 308
+                    selection_y = 240
 
 
                 elif limite == 2:
                     limite+=1
-                    selection_y = 393
+                    selection_y = 340
 
             if event.key == pygame.K_RETURN:
                 if limite ==1:

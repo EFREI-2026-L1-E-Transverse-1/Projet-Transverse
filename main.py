@@ -7,7 +7,7 @@
 
 ######## IMPORTS #########
 
-# début de structure de menu (martin)
+# début de structure de menu
 import pygame
 from nouvellepartie import *
 from lesregles import lesregles

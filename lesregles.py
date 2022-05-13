@@ -27,6 +27,7 @@ def lesregles():
     tir2 = False
     grenade = False
     grenade_thrown = False
+ 
     grenade2 = False
     grenade_thrown2 = False
 
@@ -35,7 +36,7 @@ def lesregles():
     grenade_img = pygame.image.load('img/icons/grenade.png').convert_alpha()
 
     #Couleurs et fond d'ecran
-    BG = pygame.image.load('img/logoefrei.jpg')
+    BG = pygame.image.load('img/bg.jpg')
     RED = (255, 0, 0)
 
     def draw_bg():
@@ -147,16 +148,14 @@ def lesregles():
         def tir(self):
 
             if self.tir_cooldown == 0 and self.ammo > 0:
-
-                self.tir_cooldown = 20
+                self.tir_cooldown = 40
                 bullet = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group.add(bullet)
                 #reduce ammo
                 self.ammo -= 1
 
             if self.tir_cooldown == 0 and self.ammo > 0:
-
-                self.tir_cooldown = 20
+                self.tir_cooldown = 40
                 bullet2 = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group2.add(bullet2)
                 #reduce ammo
@@ -165,7 +164,7 @@ def lesregles():
         def update_animation(self):
 
             #update animation
-            ANIMATION_COOLDOWN = 100
+            ANIMATION_COOLDOWN = 1000
             #update image depending on current frame
             self.image = self.animation_list[self.action][self.frame_index]
             #check if enough time has passed since the last update
@@ -251,6 +250,7 @@ def lesregles():
             self.rect = self.image.get_rect()
             self.rect.center = (x, y)
             self.direction = direction
+       
 
         def update(self):
             self.vel_y += GRAVITE
@@ -322,6 +322,7 @@ def lesregles():
                 player.tir()
 
             elif grenade and grenade_thrown == False and player.grenades > 0:
+             
                 grenade = Grenade(player.rect.centerx + (0.5 * player.rect.size[0] * player.direction),\
                     player.rect.top, player.direction)
                 grenade_group.add(grenade)

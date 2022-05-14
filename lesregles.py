@@ -156,7 +156,7 @@ def lesregles():
         def tir(self):
 
             if self.tir_cooldown == 0 and self.ammo > 0:
-                self.tir_cooldown = 40
+                self.tir_cooldown = 15
                 bullet = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group.add(bullet)
                 #reduce ammo
@@ -383,6 +383,8 @@ def lesregles():
                 player2.update_action(0)
             
             player2.move(mouvement_gauche2, mouvement_droite2)
+        else:
+            n = n + 1
 
         for event in pygame.event.get():
 
@@ -459,6 +461,7 @@ def lesregles():
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_g:
                     tir2 = False
+        
 
         pygame.display.update()
     

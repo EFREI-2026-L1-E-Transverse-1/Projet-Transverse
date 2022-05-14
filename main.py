@@ -9,12 +9,16 @@
 
 # début de structure de menu
 import pygame
+from pygame import mixer
 from nouvellepartie import *
 from lesregles import lesregles
 from credits import credits
 
 # Initialiaser pygame
 pygame.init()
+mixer.music.load("assets/mielpops.mp3")
+pygame.mixer.music.set_volume(0.45)
+mixer.music.play(-1)
 
 # Crée la fenêtre
 screen = pygame.display.set_mode((1280, 720))

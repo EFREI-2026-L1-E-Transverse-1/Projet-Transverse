@@ -302,8 +302,8 @@ def lesregles():
     bullet_group2 = pygame.sprite.Group()
     grenade_group2 = pygame.sprite.Group()
 
-    player = Soldier('player', 200, 140, 0.4, 5, 50, 50)
-    player2 = Soldier('player2', 600, 140, 0.4, 5, 50, 50)
+    player = Soldier('player', 200, 140, 0.4, 5, 500, 500)
+    player2 = Soldier('player2', 600, 140, 0.4, 5, 500, 500)
 
     run = True
     while run:

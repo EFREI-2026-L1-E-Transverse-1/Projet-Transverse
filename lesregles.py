@@ -6,8 +6,12 @@ def lesregles():
 
     pygame.init()
     mixer.music.load("assets/megalovania.mp3")
-    pygame.mixer.music.set_volume(0.45)
-    mixer.music.play(-1)
+    pygame.mixer.music.set_volume(0.4)
+    mixer.music.play(0)
+    n = 0
+
+    death_sound = mixer.Sound("assets/jeanne.mp3")
+               
 
     LARGEUR_ECRAN = 1280
     LONGUEUR_ECRAN = 720
@@ -200,6 +204,12 @@ def lesregles():
                 self.speed = 0
                 self.alive = False
                 self.update_action(3)
+                
+                
+                
+                
+           
+
 
         def draw(self):
             screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
@@ -296,6 +306,7 @@ def lesregles():
     run = True
     while run:
 
+
         clock.tick(FPS)
 
         draw_bg()
@@ -319,7 +330,8 @@ def lesregles():
         grenade_group2.update()
         bullet_group2.draw(screen)
         grenade_group2.draw(screen)
-
+        if(n==1):
+            death_sound.play()
         if player.alive:
 
             if tir:
@@ -339,10 +351,15 @@ def lesregles():
 
             elif mouvement_gauche or mouvement_droite:
                 player.update_action(1)
+            
 
             else:
                 player.update_action(0)
             player.move(mouvement_gauche, mouvement_droite)
+        else:
+            n = n + 1
+       
+            
 
         if player2.alive:
 
@@ -444,5 +461,5 @@ def lesregles():
                     tir2 = False
 
         pygame.display.update()
-
+    
     pygame.quit()

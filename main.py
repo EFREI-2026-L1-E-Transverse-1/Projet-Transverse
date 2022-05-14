@@ -17,8 +17,8 @@ from credits import credits
 # Initialiaser pygame
 pygame.init()
 mixer.music.load("assets/mielpops.mp3")
-pygame.mixer.music.set_volume(0.45)
-mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.4)
+mixer.music.play(0)
 
 # Crée la fenêtre
 screen = pygame.display.set_mode((1280, 720))

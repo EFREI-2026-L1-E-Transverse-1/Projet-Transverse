@@ -8,7 +8,7 @@ def lesregles():
 
     pygame.init()
     mixer.music.load("assets/megalovania.mp3")
-    pygame.mixer.music.set_volume(0.3)
+    pygame.mixer.music.set_volume(0.2)
     mixer.music.play(0)
     n = 0
 

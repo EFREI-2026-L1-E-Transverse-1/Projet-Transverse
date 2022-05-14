@@ -164,7 +164,7 @@ def lesregles():
         def update_animation(self):
 
             #update animation
-            ANIMATION_COOLDOWN = 1000
+            ANIMATION_COOLDOWN = 100
             #update image depending on current frame
             self.image = self.animation_list[self.action][self.frame_index]
             #check if enough time has passed since the last update

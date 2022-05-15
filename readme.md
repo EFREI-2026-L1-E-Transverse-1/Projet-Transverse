@@ -1,6 +1,4 @@
-# Blobs Battle
-
-Projet Transverse
+# Projet Transverse - Blobs Battle
 
 ## Auteurs
 

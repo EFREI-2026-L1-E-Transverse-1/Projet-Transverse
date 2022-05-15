@@ -1,4 +1,4 @@
-## Le jeu qui se lance
+## Lancement du jeu
 
 import pygame
 from pygame import mixer

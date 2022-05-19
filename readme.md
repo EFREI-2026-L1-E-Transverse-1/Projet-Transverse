@@ -17,7 +17,7 @@
 
 ## Instructions
 
-- **Échéance** : 24-25-27 Mai 2022  
+- **Échéance** : 25 Mai 2022
 
 ## Description
 

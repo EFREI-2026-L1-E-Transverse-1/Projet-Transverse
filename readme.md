@@ -21,7 +21,4 @@
 
 ## Description
 
-Notre projet est un jeu de tir de plateforme jouable à deux joueurs.  
-Chaque joueur contrôle une équipe de personnages, la partie se déroulant au tour par tour.  
-Le joueur choisit un de ses personnage au début de son tour, une arme (différentes armes avec des propriétés uniques sont disponibles), et doit viser pour toucher un ou plusieurs des personnages du joueur adverse.  
-Le joueur qui n’a plus de personnages alliés a perdu.  
+Jeu de tir jouable à deux. Chaque joueur contrôle un personnage avec des touches différentes. Nous avons créé deux types de tir : un tir rectiligne et un tir parabolique. Les adversaires tirent avec l’arme qu’ils veulent, se déplacent, esquivent et celui dont la barre de vie est écoulée a perdu.   

@@ -1,19 +1,9 @@
-## Lancement du jeu
-
 import pygame
-from pygame import mixer
 import os
 
 def lesregles():
 
     pygame.init()
-    mixer.music.load("assets/megalovania.mp3")
-    pygame.mixer.music.set_volume(0.2)
-    mixer.music.play(0)
-    n = 0
-
-    death_sound = mixer.Sound("assets/jeanne.mp3")
-               
 
     LARGEUR_ECRAN = 1280
     LONGUEUR_ECRAN = 720
@@ -63,6 +53,7 @@ def lesregles():
             self.ammo = ammo
             self.start_ammo = ammo
             self.tir_cooldown = 0
+            self.throw_cooldown = 0
             self.grenades = grenades
             self.health = 100
             self.max_health = 100
@@ -104,6 +95,8 @@ def lesregles():
 
             if self.tir_cooldown > 0:
                 self.tir_cooldown -= 1
+            if self.throw_cooldown > 0:
+                self.throw_cooldown -= 1
 
         def update_health_bar(self, surface):
 
@@ -158,7 +151,7 @@ def lesregles():
         def tir(self):
 
             if self.tir_cooldown == 0 and self.ammo > 0:
-                self.tir_cooldown = 15
+                self.tir_cooldown = 40
                 bullet = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group.add(bullet)
                 #reduce ammo
@@ -174,7 +167,7 @@ def lesregles():
         def update_animation(self):
 
             #update animation
-            ANIMATION_COOLDOWN = 100
+            ANIMATION_COOLDOWN = 1000
             #update image depending on current frame
             self.image = self.animation_list[self.action][self.frame_index]
             #check if enough time has passed since the last update
@@ -203,15 +196,10 @@ def lesregles():
         def check_alive(self):
             if self.health <= 0:
                 self.health = 0
+                self.max_health = 0
                 self.speed = 0
                 self.alive = False
                 self.update_action(3)
-                
-                
-                
-                
-           
-
 
         def draw(self):
             screen.blit(pygame.transform.flip(self.image, self.flip, False), self.rect)
@@ -302,12 +290,11 @@ def lesregles():
     bullet_group2 = pygame.sprite.Group()
     grenade_group2 = pygame.sprite.Group()
 
-    player = Soldier('player', 200, 140, 0.4, 5, 500, 500)
-    player2 = Soldier('player2', 600, 140, 0.4, 5, 500, 500)
+    player = Soldier('player', 200, 140, 0.4, 5, 50, 50)
+    player2 = Soldier('player2', 600, 140, 0.4, 5, 50, 50)
 
     run = True
     while run:
-
 
         clock.tick(FPS)
 
@@ -332,16 +319,16 @@ def lesregles():
         grenade_group2.update()
         bullet_group2.draw(screen)
         grenade_group2.draw(screen)
-        if(n==1):
-            death_sound.play()
+
         if player.alive:
 
             if tir:
                 player.tir()
 
-            elif grenade and grenade_thrown == False and player.grenades > 0:
-             
-                grenade = Grenade(player.rect.centerx + (0.5 * player.rect.size[0] * player.direction),\
+            elif grenade and grenade_thrown == False and player.grenades > 0 and player.throw_cooldown == 0:
+                
+                player.throw_cooldown = 30
+                grenade = Grenade(player.rect.centerx + (0.5 * player.rect.size[0] * player.direction),
                     player.rect.top, player.direction)
                 grenade_group.add(grenade)
 
@@ -353,22 +340,19 @@ def lesregles():
 
             elif mouvement_gauche or mouvement_droite:
                 player.update_action(1)
-            
 
             else:
                 player.update_action(0)
             player.move(mouvement_gauche, mouvement_droite)
-        else:
-            n = n + 1
-       
-            
 
         if player2.alive:
 
             if tir2:
                 player2.tir()
 
-            elif grenade2 and grenade_thrown2 == False and player2.grenades > 0:
+            elif grenade2 and grenade_thrown2 == False and player2.grenades > 0 and player2.throw_cooldown == 0:
+                
+                player2.throw_cooldown = 30
                 grenade2 = Grenade(player2.rect.centerx + (0.5 * player2.rect.size[0] * player2.direction),\
                     player2.rect.top, player2.direction)
                 grenade_group2.add(grenade2)
@@ -385,8 +369,6 @@ def lesregles():
                 player2.update_action(0)
             
             player2.move(mouvement_gauche2, mouvement_droite2)
-        else:
-            n = n + 1
 
         for event in pygame.event.get():
 
@@ -463,8 +445,7 @@ def lesregles():
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_g:
                     tir2 = False
-        
 
         pygame.display.update()
-    
+
     pygame.quit()

@@ -21,4 +21,7 @@
 
 ## Description
 
-Jeu de tir jouable à deux. Chaque joueur contrôle un personnage avec des touches différentes. Nous avons créé deux types de tir : un tir rectiligne et un tir parabolique. Les adversaires tirent avec l’arme qu’ils veulent, se déplacent, esquivent et celui dont la barre de vie est écoulée a perdu.   
+Jeu de tir jouable à deux.  
+Chaque joueur contrôle un personnage avec des touches différentes.  
+Nous avons créé deux types de tir : un tir rectiligne et un tir parabolique.  
+Les adversaires tirent avec l’arme qu’ils veulent, se déplacent, esquivent et celui dont la barre de vie est écoulée a perdu.   

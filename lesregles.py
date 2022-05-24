@@ -151,14 +151,14 @@ def lesregles():
         def tir(self):
 
             if self.tir_cooldown == 0 and self.ammo > 0:
-                self.tir_cooldown = 40
+                self.tir_cooldown = 20
                 bullet = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group.add(bullet)
                 #reduce ammo
                 self.ammo -= 1
 
             if self.tir_cooldown == 0 and self.ammo > 0:
-                self.tir_cooldown = 40
+                self.tir_cooldown = 20
                 bullet2 = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group2.add(bullet2)
                 #reduce ammo

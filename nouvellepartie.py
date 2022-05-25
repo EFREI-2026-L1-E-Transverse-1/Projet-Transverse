@@ -4,7 +4,7 @@ import pygame
 from pygame import mixer
 import os
 
-def lesregles():
+def nouvellepartie():
 
     pygame.init()
     mixer.music.load("img/megalovania.mp3")

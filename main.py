@@ -53,7 +53,7 @@ while running:
 
  
             if event.key == pygame.K_RETURN:
-                    background = lesregles()
+                    background = nouvellepartie()
 
     default_selection_menu(default_selection_x,default_selection_y)
     pygame.display.update()

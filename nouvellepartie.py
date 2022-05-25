@@ -1,6 +1,8 @@
 ## Lancement du jeu
 
+from time import sleep
 import pygame
+from main import *
 from pygame import mixer
 import os
 
@@ -11,6 +13,7 @@ def nouvellepartie():
     pygame.mixer.music.set_volume(0.4)
     mixer.music.play(0)
     n = 0
+    mort = 0;
 
     death_sound = mixer.Sound("img/jeanne.mp3")
                
@@ -294,7 +297,7 @@ def nouvellepartie():
 
     player = Soldier('player', 200, 140, 0.4, 5, 500, 500)
     player2 = Soldier('player2', 600, 140, 0.4, 5, 500, 500)
-
+    re =0
     run = True
     while run:
 
@@ -323,8 +326,10 @@ def nouvellepartie():
         bullet_group2.draw(screen)
         grenade_group2.draw(screen)
         if(n==1):
-            death_sound.set_volume(0.6)
+            death_sound.set_volume(0.9)
             death_sound.play()
+            mort = 1
+            
         if player.alive:
 
             if tir:
@@ -457,5 +462,23 @@ def nouvellepartie():
         
 
         pygame.display.update()
+        
+        if(mort==1):
+            if (re==170):
+
+                BG=nouvellepartie()
+                
+
+                
+
+            else:
+                re+=1
+                police = pygame.font.SysFont("Comic Sans MS" ,80)
+                image_texte = police.render ( "GAME OVER", 1 , (255,0,0) )
+                screen.blit(image_texte, (370,560))
+                pygame.display.flip()
+                
+
+            
     
     pygame.quit()

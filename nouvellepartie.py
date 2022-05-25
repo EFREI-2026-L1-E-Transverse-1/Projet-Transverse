@@ -118,8 +118,10 @@ def nouvellepartie():
             bar_under_pos = [self.rect.x + 20, self.rect.y - 14, self.max_health, 6]
             
             #affichage de la barre de vie
-            pygame.draw.rect(surface, bar_under_color, bar_under_pos)
-            pygame.draw.rect(surface, bar_color, bar_pos)
+            if (self.en_vie==True):
+
+                pygame.draw.rect(surface, bar_under_color, bar_under_pos)
+                pygame.draw.rect(surface, bar_color, bar_pos)
             
         def damage(self, amount):
             # dégats reçus

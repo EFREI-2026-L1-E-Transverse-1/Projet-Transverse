@@ -9,7 +9,10 @@
 - **Alexandre Manjarres**  _(20210639)_
 - **Léa Varing**        _(20210703)_
 - **Adem Debbahi**             _(20210562)_
-  
+
+##  Comment jouer ?
+- Pour le joueur rouge, se déplacer avec les flèches et tirer avec le clique droit (tir rectiligne) et le clique gauche (grenande parabolique)
+- Pour le joueur bleu, se déplacer avec ZQSD et tirer avec la touche G (tir rectiligne) et la touche H (grenande parabolique)
 ## Programation
 
 - **Fichier à Exécuter** : main.py

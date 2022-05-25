@@ -2,7 +2,6 @@
 
 from time import sleep
 import pygame
-from main import *
 from pygame import mixer
 import os
 
@@ -62,24 +61,24 @@ def nouvellepartie():
             pygame.sprite.Sprite.__init__(self)
             self.alive = True
             self.char_type = char_type
-            self.speed = speed
-            self.ammo = ammo
-            self.start_ammo = ammo
             self.tir_cooldown = 0
             self.grenades = grenades
             self.health = 100
             self.max_health = 100
             self.direction = 1
             self.vel_y = 0
+            self.start_ammo = ammo
             self.jump = False
             self.in_air = True
             self.flip = False
+            self.speed = speed
+            self.ammo = ammo
             self.animation_list = []
             self.frame_index = 0
             self.action = 0
             self.update_time = pygame.time.get_ticks()
 
-            animation_types = ['Idle', 'Run', 'Jump', 'Death']
+            animation_types = ['Immobile', 'Course', 'Saut', 'Mort']
 
             for animation in animation_types:
 

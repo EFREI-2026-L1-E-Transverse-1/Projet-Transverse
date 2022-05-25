@@ -465,7 +465,7 @@ def nouvellepartie():
         pygame.display.update()
         
         if(mort==1):
-            if (re==170):
+            if (re==270):
 
                 BG=nouvellepartie()
                 

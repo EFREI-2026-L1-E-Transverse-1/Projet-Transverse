@@ -4,15 +4,15 @@ import pygame
 from pygame import mixer
 import os
 
-def lesregles():
+def nouvellepartie():
 
     pygame.init()
-    mixer.music.load("assets/megalovania.mp3")
-    pygame.mixer.music.set_volume(0.2)
+    mixer.music.load("img/megalovania.mp3")
+    pygame.mixer.music.set_volume(0.3)
     mixer.music.play(0)
     n = 0
 
-    death_sound = mixer.Sound("assets/jeanne.mp3")
+    death_sound = mixer.Sound("img/jeanne.mp3")
                
 
     LARGEUR_ECRAN = 1280
@@ -80,9 +80,9 @@ def lesregles():
 
             for animation in animation_types:
 
-                #reset temporary list of images
+                # Renitialiser temporairement la liste des images
                 temp_list = []
-                #count number of files in the folder
+           
                 num_of_frames = len(os.listdir(f'img/{self.char_type}/{animation}'))
 
                 for i in range(num_of_frames):
@@ -100,7 +100,7 @@ def lesregles():
 
             self.update_animation()
             self.check_alive()
-            #update cooldown
+            #mettre a jour le delai d'animation
 
             if self.tir_cooldown > 0:
                 self.tir_cooldown -= 1
@@ -146,12 +146,12 @@ def lesregles():
                 self.vel_y
             dy += self.vel_y
 
-            #check collision with floor
+            # verification colision avec le sol
             if self.rect.bottom + dy > 500:
                 dy = 500 - self.rect.bottom
                 self.in_air = False
 
-            #update rectangle position
+           
             self.rect.x += dx
             self.rect.y += dy
 
@@ -161,29 +161,26 @@ def lesregles():
                 self.tir_cooldown = 15
                 bullet = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group.add(bullet)
-                #reduce ammo
+           
                 self.ammo -= 1
 
             if self.tir_cooldown == 0 and self.ammo > 0:
                 self.tir_cooldown = 40
                 bullet2 = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
                 bullet_group2.add(bullet2)
-                #reduce ammo
                 self.ammo -= 1
 
         def update_animation(self):
 
-            #update animation
             ANIMATION_COOLDOWN = 100
-            #update image depending on current frame
+
             self.image = self.animation_list[self.action][self.frame_index]
-            #check if enough time has passed since the last update
 
             if pygame.time.get_ticks() - self.update_time > ANIMATION_COOLDOWN:
                 self.update_time = pygame.time.get_ticks()
                 self.frame_index += 1
 
-            #if the animation has run out the reset back to the start
+ 
             if self.frame_index >= len(self.animation_list[self.action]):
 
                 if self.action == 3:
@@ -193,10 +190,9 @@ def lesregles():
                     self.frame_index = 0
 
         def update_action(self, new_action):
-            #check if the new action is different to the previous one
+ 
             if new_action != self.action:
                 self.action = new_action
-                #update the animation settings
                 self.frame_index = 0
                 self.update_time = pygame.time.get_ticks()
 
@@ -206,11 +202,6 @@ def lesregles():
                 self.speed = 0
                 self.alive = False
                 self.update_action(3)
-                
-                
-                
-                
-           
 
 
         def draw(self):
@@ -238,13 +229,12 @@ def lesregles():
 
         def update(self):
 
-            #move bullet
+
             self.rect.x += (self.direction * self.speed)
-            #check if bullet has gone off screen
+
             if self.rect.right < 0 or self.rect.left > LARGEUR_ECRAN:
                 self.kill()
 
-            #check collision with characters
             if pygame.sprite.spritecollide(player, bullet_group, False):
                 if player.alive:
                     player.health -= 5
@@ -285,7 +275,7 @@ def lesregles():
             self.rect.x += dx
             self.rect.y += dy
 
-            #check collision with characters
+      
             if pygame.sprite.spritecollide(player, grenade_group2, False):
                 if player.alive:
                     player.health -= 10
@@ -333,6 +323,7 @@ def lesregles():
         bullet_group2.draw(screen)
         grenade_group2.draw(screen)
         if(n==1):
+            death_sound.set_volume(0.8)
             death_sound.play()
         if player.alive:
 

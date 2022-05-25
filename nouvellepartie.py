@@ -11,7 +11,7 @@ def nouvellepartie():
     mixer.music.load("img/megalovania.mp3")
     pygame.mixer.music.set_volume(0.4)
     mixer.music.play(0)
- 
+    n =0
     mort = 0;
 
   
@@ -330,8 +330,9 @@ def nouvellepartie():
         grenade_group2.update()
         projectile_group2.draw(screen)
         grenade_group2.draw(screen)
-        
-            
+        if(n==1):
+           
+            mort = 1            
         if player.en_vie:
 
             if tir:
@@ -358,7 +359,8 @@ def nouvellepartie():
             else:
                 player.update_action(0)
             player.move(mouvement_gauche, mouvement_droite)
-     
+        else:
+            n = n + 1
        
             
 
@@ -386,6 +388,8 @@ def nouvellepartie():
                 player2.update_action(0)
             
             player2.move(mouvement_gauche2, mouvement_droite2)
+        else:
+            n = n + 1
    
 
         for event in pygame.event.get():
@@ -471,9 +475,7 @@ def nouvellepartie():
             if (re==270):
 
                 BG=nouvellepartie()
-                
-
-                
+            
 
             else:
                 re+=1

@@ -43,7 +43,7 @@ def nouvellepartie():
     grenade2 = False
     grenade_thrown2 = False
 
-    bullet_img = pygame.image.load('img/icons/bullet.png').convert_alpha()
+    projectile_img = pygame.image.load('img/icons/bullet.png').convert_alpha()
     #grenade
     grenade_img = pygame.image.load('img/icons/grenade.png').convert_alpha()
 
@@ -59,7 +59,7 @@ def nouvellepartie():
         def __init__(self, char_type, x, y, scale, speed, ammo, grenades):
 
             pygame.sprite.Sprite.__init__(self)
-            self.alive = True
+            self.en_vie = True
             self.char_type = char_type
             self.tir_cooldown = 0
             self.grenades = grenades
@@ -101,7 +101,7 @@ def nouvellepartie():
         def update(self):
 
             self.update_animation()
-            self.check_alive()
+            self.check_en_vie()
             #mettre a jour le delai d'animation
 
             if self.tir_cooldown > 0:
@@ -161,15 +161,15 @@ def nouvellepartie():
 
             if self.tir_cooldown == 0 and self.ammo > 0:
                 self.tir_cooldown = 15
-                bullet = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
-                bullet_group.add(bullet)
+                projectile = Projectile(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
+                projectile_group.add(projectile)
            
                 self.ammo -= 1
 
             if self.tir_cooldown == 0 and self.ammo > 0:
                 self.tir_cooldown = 40
-                bullet2 = Bullet(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
-                bullet_group2.add(bullet2)
+                projectile2 = Projectile(self.rect.centerx + (0.6 * self.rect.size[0] * self.direction), self.rect.centery, self.direction)
+                projectile_group2.add(projectile2)
                 self.ammo -= 1
 
         def update_animation(self):
@@ -198,11 +198,11 @@ def nouvellepartie():
                 self.frame_index = 0
                 self.update_time = pygame.time.get_ticks()
 
-        def check_alive(self):
+        def check_en_vie(self):
             if self.health <= 0:
                 self.health = 0
                 self.speed = 0
-                self.alive = False
+                self.en_vie = False
                 self.update_action(3)
 
 
@@ -211,20 +211,20 @@ def nouvellepartie():
 
         def degats(self):
             if pygame.sprite.spritecollide(player, grenade_group2, False):
-                if player.alive:
+                if player.en_vie:
                     player.health -= 1
                     grenade_group2.remove()
             if pygame.sprite.spritecollide(player2, grenade_group, False):
-                if player2.alive:
+                if player2.en_vie:
                     player2.health -= 1
                     grenade_group.remove()
 
-    class Bullet(pygame.sprite.Sprite):
+    class Projectile(pygame.sprite.Sprite):
 
         def __init__(self, x, y, direction):
             pygame.sprite.Sprite.__init__(self)
             self.speed = 10
-            self.image = bullet_img
+            self.image = projectile_img
             self.rect = self.image.get_rect()
             self.rect.center = (x, y)
             self.direction = direction
@@ -237,13 +237,13 @@ def nouvellepartie():
             if self.rect.right < 0 or self.rect.left > LARGEUR_ECRAN:
                 self.kill()
 
-            if pygame.sprite.spritecollide(player, bullet_group, False):
-                if player.alive:
+            if pygame.sprite.spritecollide(player, projectile_group, False):
+                if player.en_vie:
                     player.health -= 5
                     self.kill()
 
-            if pygame.sprite.spritecollide(player2, bullet_group, False):
-                if player2.alive:
+            if pygame.sprite.spritecollide(player2, projectile_group, False):
+                if player2.en_vie:
                     player2.health -= 5
                     self.kill()
 
@@ -279,19 +279,19 @@ def nouvellepartie():
 
       
             if pygame.sprite.spritecollide(player, grenade_group2, False):
-                if player.alive:
+                if player.en_vie:
                     player.health -= 10
                     self.kill()
 
             if pygame.sprite.spritecollide(player2, grenade_group, False):
-                if player2.alive:
+                if player2.en_vie:
                     player2.health -= 10
                     self.kill()
 
-    bullet_group = pygame.sprite.Group()
+    projectile_group = pygame.sprite.Group()
     grenade_group = pygame.sprite.Group()
 
-    bullet_group2 = pygame.sprite.Group()
+    projectile_group2 = pygame.sprite.Group()
     grenade_group2 = pygame.sprite.Group()
 
     player = Soldier('player', 200, 140, 0.4, 5, 500, 500)
@@ -315,21 +315,21 @@ def nouvellepartie():
         player2.update_health_bar(screen)
         player2.degats()
 
-        bullet_group.update()
+        projectile_group.update()
         grenade_group.update()
-        bullet_group.draw(screen)
+        projectile_group.draw(screen)
         grenade_group.draw(screen)
 
-        bullet_group2.update()
+        projectile_group2.update()
         grenade_group2.update()
-        bullet_group2.draw(screen)
+        projectile_group2.draw(screen)
         grenade_group2.draw(screen)
         if(n==1):
             death_sound.set_volume(0.9)
             death_sound.play()
             mort = 1
             
-        if player.alive:
+        if player.en_vie:
 
             if tir:
                 player.tir()
@@ -358,7 +358,7 @@ def nouvellepartie():
        
             
 
-        if player2.alive:
+        if player2.en_vie:
 
             if tir2:
                 player2.tir()
@@ -402,10 +402,10 @@ def nouvellepartie():
                 elif event.key == pygame.K_d:
                     mouvement_droite2 = True
 
-                if event.key == pygame.K_UP and player.alive:
+                if event.key == pygame.K_UP and player.en_vie:
                     player.jump = True
 
-                elif event.key == pygame.K_z and player2.alive:
+                elif event.key == pygame.K_z and player2.en_vie:
                     player2.jump = True
 
                 elif event.key == pygame.K_ESCAPE:

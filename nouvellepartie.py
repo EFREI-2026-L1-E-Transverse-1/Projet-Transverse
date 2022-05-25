@@ -11,10 +11,10 @@ def nouvellepartie():
     mixer.music.load("img/megalovania.mp3")
     pygame.mixer.music.set_volume(0.4)
     mixer.music.play(0)
-    n = 0
+ 
     mort = 0;
 
-    death_sound = mixer.Sound("img/jeanne.mp3")
+  
                
 
     LARGEUR_ECRAN = 1280
@@ -77,6 +77,7 @@ def nouvellepartie():
             self.frame_index = 0
             self.action = 0
             self.update_time = pygame.time.get_ticks()
+            self.throw_cooldown = 0
 
             animation_types = ['Immobile', 'Course', 'Saut', 'Mort']
 
@@ -106,6 +107,8 @@ def nouvellepartie():
 
             if self.tir_cooldown > 0:
                 self.tir_cooldown -= 1
+            if self.throw_cooldown > 0:
+                self.throw_cooldown -= 1
 
         def update_health_bar(self, surface):
 
@@ -260,6 +263,7 @@ def nouvellepartie():
             self.rect = self.image.get_rect()
             self.rect.center = (x, y)
             self.direction = direction
+            self.grenadecoodown = 0
        
 
         def update(self):
@@ -326,20 +330,19 @@ def nouvellepartie():
         grenade_group2.update()
         projectile_group2.draw(screen)
         grenade_group2.draw(screen)
-        if(n==1):
-            death_sound.set_volume(0.9)
-            death_sound.play()
-            mort = 1
+        
             
         if player.en_vie:
 
             if tir:
                 player.tir()
 
-            elif grenade and grenade_thrown == False and player.grenades > 0:
-             
-                grenade = Grenade(player.rect.centerx + (0.5 * player.rect.size[0] * player.direction),\
-                    player.rect.top, player.direction)
+
+
+            elif grenade and grenade_thrown == False and player.grenades > 0 and player.throw_cooldown == 0:
+
+                player.throw_cooldown = 30
+                grenade = Grenade(player.rect.centerx + (0.5 * player.rect.size[0] * player.direction),player.rect.top, player.direction)
                 grenade_group.add(grenade)
 
                 player.grenades -= 1
@@ -355,8 +358,7 @@ def nouvellepartie():
             else:
                 player.update_action(0)
             player.move(mouvement_gauche, mouvement_droite)
-        else:
-            n = n + 1
+     
        
             
 
@@ -365,7 +367,9 @@ def nouvellepartie():
             if tir2:
                 player2.tir()
 
-            elif grenade2 and grenade_thrown2 == False and player2.grenades > 0:
+            elif grenade2 and grenade_thrown2 == False and player2.grenades > 0 and player2.throw_cooldown == 0:
+
+                player2.throw_cooldown = 30
                 grenade2 = Grenade(player2.rect.centerx + (0.5 * player2.rect.size[0] * player2.direction),\
                     player2.rect.top, player2.direction)
                 grenade_group2.add(grenade2)
@@ -382,8 +386,7 @@ def nouvellepartie():
                 player2.update_action(0)
             
             player2.move(mouvement_gauche2, mouvement_droite2)
-        else:
-            n = n + 1
+   
 
         for event in pygame.event.get():
 

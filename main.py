@@ -5,7 +5,7 @@
 #####                     #####
 ###############################
 
-######## IMPORTS #########dddddd
+######## IMPORTS #########
 
 # début de structure de menu
 import pygame
